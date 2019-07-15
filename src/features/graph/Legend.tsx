@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { cycleColor } from "../../helpers/biorythm";
+import Label from "./Label";
 
 const FlexWrap = styled.div`
   display: flex;
@@ -15,17 +16,28 @@ const Circle = styled.div`
   border-radius: 50%;
 `;
 
-const LegendEntity = ({ type }: { type: string }) => (
+interface LegendEntityProps {
+  type: string;
+  value: number;
+}
+
+interface LegendProps {
+  data: {
+    [key: string]: number;
+  };
+}
+
+const LegendEntity = ({ type, value }: LegendEntityProps) => (
   <FlexWrap style={{ marginRight: "0.5rem" }}>
     <Circle color={cycleColor(type)} />
-    <span>{type}</span>
+    <Label type={type} value={value} />
   </FlexWrap>
 );
 
-const Legend = ({ types }: { types: string[] }) => (
+const Legend = ({ data }: LegendProps) => (
   <FlexWrap style={{ marginTop: "1rem" }}>
-    {types.map(type => (
-      <LegendEntity type={type} key={type} />
+    {Object.keys(data).map(type => (
+      <LegendEntity type={type} value={data[type]} key={type} />
     ))}
   </FlexWrap>
 );

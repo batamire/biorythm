@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import moment from "moment";
 import { Person } from "../../constants/people";
 import { SVG, Legend } from ".";
+import { bioCalc } from "../../helpers/biorythm";
 
 interface ChartProps {
   person: Person;
@@ -35,7 +37,12 @@ const Chart = ({ person }: ChartProps) => {
         </label>
       </div>
       <SVG person={person} types={types} />
-      <Legend types={types} />
+      <Legend
+        data={types.reduce((obj: any, type) => {
+          obj[type] = bioCalc(moment(person.birthday), moment(), type);
+          return obj;
+        }, {})}
+      />
     </>
   );
 };
