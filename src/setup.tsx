@@ -1,9 +1,10 @@
 import ApolloClient, { InMemoryCache } from "apollo-boost";
 import { GET_PEOPLE, People } from "./constants/people";
+import { persistCache } from "apollo-cache-persist";
 // import { GraphQLDateTime } from "graphql-iso-date";
 
 // CSS
-import "./App.css";
+import "./app.css";
 
 const client = new ApolloClient({
   uri: "", // no real graphql server, only local state

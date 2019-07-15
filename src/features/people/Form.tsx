@@ -1,7 +1,45 @@
 import React, { useState } from "react";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
+import styled from "@emotion/styled";
 // import { GraphQLDateTime } from "graphql-iso-date";
+
+const StyledForm = styled.form`
+  display: flex;
+`;
+
+const Input = styled.input`
+  margin-right: 0.5rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+  background: #fff;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  &:hover {
+    background: #add8e6;
+  }
+  &:focus {
+    color: #fff;
+    background: #466e7b;
+  }
+`;
+
+const Button = styled.button`
+  padding: 0.25rem 1rem;
+  font-size: 1rem;
+  color: #fff;
+  background: #004ea9;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  &:hover {
+    background: #002e83;
+  }
+`;
 
 let nextId = 0;
 
@@ -38,9 +76,9 @@ const Form = () => {
   const [name, setName] = useState("");
   const [birthday, setBirthday] = useState("");
   return (
-    <Mutation mutation={ADD_PERSON} variables={{ id: 1, name, birthday }}>
+    <Mutation mutation={ADD_PERSON}>
       {(addPerson: any) => (
-        <form
+        <StyledForm
           onSubmit={e => {
             e.preventDefault();
             if (!inputValid({ name, birthday })) return;
@@ -49,18 +87,18 @@ const Form = () => {
             setBirthday("");
           }}
         >
-          <input
+          <Input
             type="text"
             value={name}
             onChange={event => setName(event.target.value)}
           />
-          <input
+          <Input
             type="date"
             value={birthday}
             onChange={event => setBirthday(event.target.value)}
           />
-          <button type="submit">Submit</button>
-        </form>
+          <Button type="submit">Add</Button>
+        </StyledForm>
       )}
     </Mutation>
   );

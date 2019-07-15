@@ -8,9 +8,11 @@ import Form from "./Form";
 interface DashboardProps extends RouteComponentProps {}
 
 const Dashboard = (props: DashboardProps) => (
-  <div>
+  <>
     <Header title="Biorythm" />
     <Form />
+
+    <h2>Last 10 entries</h2>
     <Query<People> query={GET_PEOPLE}>
       {({ data, error }) => {
         if (error) return <p>{error.message}</p>;
@@ -18,7 +20,7 @@ const Dashboard = (props: DashboardProps) => (
 
         return (
           <ul>
-            {data!.people.map(p => {
+            {data!.people.slice(0, 10).map(p => {
               return (
                 <li key={p.id}>
                   {p.name} - {p.birthday}
@@ -29,7 +31,7 @@ const Dashboard = (props: DashboardProps) => (
         );
       }}
     </Query>
-  </div>
+  </>
 );
 
 export default Dashboard;
