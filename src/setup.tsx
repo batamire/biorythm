@@ -1,7 +1,6 @@
 import ApolloClient, { InMemoryCache } from "apollo-boost";
 import { GET_PEOPLE, People, Person } from "./constants/people";
-import { persistCache } from "apollo-cache-persist";
-import gql from "graphql-tag";
+// import { persistCache } from "apollo-cache-persist";
 // import { GraphQLDateTime } from "graphql-iso-date";
 
 // CSS
@@ -29,7 +28,7 @@ const client = new ApolloClient({
       people: [
         {
           id: "1",
-          name: "mirko",
+          name: "Mirko Kirović",
           birthday: "1982-11-23",
           __typename: "Person"
         }

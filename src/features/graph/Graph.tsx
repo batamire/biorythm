@@ -3,6 +3,7 @@ import { RouteComponentProps } from "@reach/router";
 import { Query } from "react-apollo";
 import { GET_PERSON, Person } from "../../constants/people";
 import Header from "../../components/Header";
+import SVG from "../../features/graph/SVG";
 
 interface GraphProps
   extends RouteComponentProps<{
@@ -20,7 +21,7 @@ const Graph = (props: GraphProps) => (
       {({ data, loading, error }) => {
         if (loading) return <p>Loading</p>;
         if (error) return <p>{error.message}</p>;
-        return <div>{data!.person.name}</div>;
+        return <SVG person={data!.person} />;
       }}
     </Query>
   </>
