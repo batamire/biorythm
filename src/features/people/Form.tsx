@@ -17,7 +17,22 @@ const ADD_PERSON = gql`
   }
 `;
 
-type onInputChange = (event: React.FormEvent<HTMLInputElement>) => void;
+const inputValid = ({
+  name,
+  birthday
+}: {
+  name: string | null;
+  birthday: string | null;
+}) => {
+  const errors = [];
+  if (!name || name === "") errors.push("Name is required");
+  if (!birthday) errors.push("Birthday is required");
+  if (errors.length) {
+    alert(errors.join("\n"));
+    return false;
+  }
+  return true;
+};
 
 const Form = () => {
   const [name, setName] = useState("");
@@ -28,14 +43,21 @@ const Form = () => {
         <form
           onSubmit={e => {
             e.preventDefault();
+            if (!inputValid({ name, birthday })) return;
             addPerson({ variables: { id: ++nextId, name, birthday } });
             setName("");
+            setBirthday("");
           }}
         >
           <input
             type="text"
             value={name}
             onChange={event => setName(event.target.value)}
+          />
+          <input
+            type="date"
+            value={birthday}
+            onChange={event => setBirthday(event.target.value)}
           />
           <button type="submit">Submit</button>
         </form>
