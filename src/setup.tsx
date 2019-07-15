@@ -1,14 +1,16 @@
-import ApolloClient from "apollo-boost";
-import { GraphQLDateTime } from "graphql-iso-date";
+import ApolloClient, { InMemoryCache } from "apollo-boost";
+// import { GraphQLDateTime } from "graphql-iso-date";
 
 // CSS
 import "./App.css";
 
 const client = new ApolloClient({
   uri: "", // no real graphql server, only local state
+  cache: new InMemoryCache(),
   clientState: {
     typeDefs: `
       type Person {
+        id: ID
         name: String
         birthday: GraphQLDateTime
       }
@@ -16,7 +18,7 @@ const client = new ApolloClient({
         people: [Person]
       }
       type Mutation {
-        updatePeople(people: [Person]!)
+        addPerson(id: ID, name: String!, birthday: String): [Person]
       }
     `,
     defaults: {
@@ -24,8 +26,18 @@ const client = new ApolloClient({
     },
     resolvers: {
       Mutation: {
-        updatePeople: async (_obj, { people }, { cache, getCacheKey }) => {
-          await cache.writeData({ data: { people } });
+        addPerson: async (_obj, args, { cache, getCacheKey }) => {
+          // console.log("ARGS", args);
+          await cache.writeData({
+            data: {
+              people: [
+                {
+                  ...args,
+                  __typename: "Person"
+                }
+              ]
+            }
+          });
           return null;
         }
       }
