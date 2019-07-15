@@ -15,27 +15,23 @@ const days = Array.from(dayRange.by("day"));
 
 interface SVGProps {
   person: Person;
+  types: string[];
 }
 
-const SVG = ({ person: { birthday } }: SVGProps) => (
+const SVG = ({ person: { birthday }, types }: SVGProps) => (
   <svg viewBox={`0 0 900 300`} width="900" height="300">
     <g>
       {days.map((m, index) => (
         <Day date={m} offset={index} key={index} />
       ))}
     </g>
-    <Bar
-      color={cycleColor("physical")}
-      data={days.map(m => bioCalc(moment(birthday), m, "physical"))}
-    />
-    <Bar
-      color={cycleColor("emotional")}
-      data={days.map(m => bioCalc(moment(birthday), m, "emotional"))}
-    />
-    <Bar
-      color={cycleColor("intellectual")}
-      data={days.map(m => bioCalc(moment(birthday), m, "intellectual"))}
-    />
+    {types.map(type => (
+      <Bar
+        color={cycleColor(type)}
+        data={days.map(m => bioCalc(moment(birthday), m, type))}
+        key={type}
+      />
+    ))}
   </svg>
 );
 

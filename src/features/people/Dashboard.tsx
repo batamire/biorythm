@@ -1,8 +1,9 @@
 import React from "react";
-import { Link, RouteComponentProps } from "@reach/router";
+import { RouteComponentProps } from "@reach/router";
 import { Query } from "react-apollo";
 import { GET_PEOPLE, People } from "../../constants/people";
 import Header from "../../components/Header";
+import Link from "../../components/Link";
 import Form from "./Form";
 
 interface DashboardProps extends RouteComponentProps {}
