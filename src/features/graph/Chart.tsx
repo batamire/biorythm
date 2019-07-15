@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import moment from "moment";
 import { Person } from "../../constants/people";
-import { SVG, Legend } from ".";
+import { SVG, Legend, LifeStats } from ".";
 import { bioCalc } from "../../helpers/biorythm";
 
 interface ChartProps {
@@ -43,6 +43,7 @@ const Chart = ({ person }: ChartProps) => {
           return obj;
         }, {})}
       />
+      <LifeStats person={person} />
     </>
   );
 };
