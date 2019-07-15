@@ -1,6 +1,6 @@
 import React from "react";
+import { client } from "./setup";
 import logo from "./logo.svg";
-import "./App.css";
 
 const App: React.FC = () => (
   <div className="App">
