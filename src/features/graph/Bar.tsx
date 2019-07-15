@@ -1,7 +1,7 @@
 import React from "react";
 
 interface BarProps {
-  data: Array<number>;
+  data: number[];
   color: string;
 }
 

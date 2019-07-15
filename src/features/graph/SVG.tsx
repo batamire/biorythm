@@ -20,11 +20,9 @@ interface SVGProps {
 
 const SVG = ({ person: { birthday }, types }: SVGProps) => (
   <svg viewBox={`0 0 900 300`} width="900" height="300">
-    <g>
-      {days.map((m, index) => (
-        <Day date={m} offset={index} key={index} />
-      ))}
-    </g>
+    {days.map((m, index) => (
+      <Day date={m} offset={index} key={index} />
+    ))}
     {types.map(type => (
       <Bar
         color={cycleColor(type)}
