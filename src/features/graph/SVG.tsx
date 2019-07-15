@@ -30,13 +30,45 @@ const Day = ({ dayNumber, dayName, offset }: DayProps) => (
   </g>
 );
 
-const SVG = ({ person }: SVGProps) => (
-  <svg viewBox={`0 0 900 300`} width="900" height="300">
-    {Array(30)
-      .fill(0)
-      .map((a, index) => (
-        <Day dayNumber={index} dayName="Sa" offset={index} key={index} />
+interface BarProps {
+  data: Array<number>;
+}
+
+const Bar = ({ data }: BarProps) => {
+  console.log(data);
+  return (
+    <g>
+      {data.slice(0, data.length - 1).map((a, index) => (
+        <>
+          {console.log(data[index])}
+          <line
+            x1={30 * index + 15}
+            y1={data[index]}
+            x2={30 * (index + 1) + 15}
+            y2={data[index + 1]}
+            key={`${a}-${index}`}
+            stroke="#000"
+          />
+        </>
       ))}
+    </g>
+  );
+};
+
+const SVG = ({ person: { birthday } }: SVGProps) => (
+  <svg viewBox={`0 0 900 300`} width="900" height="300">
+    <g>
+      {Array(30)
+        .fill(0)
+        .map((a, index) => (
+          <Day dayNumber={index} dayName="Sa" offset={index} key={index} />
+        ))}
+    </g>
+    <Bar
+      data={Array.from({ length: 30 }, () =>
+        Math.floor(Math.random() * 100 + 1)
+      )}
+    />
   </svg>
 );
 
