@@ -19,3 +19,13 @@ export const GET_PEOPLE = gql`
     }
   }
 `;
+
+export const GET_PERSON = gql`
+  query($id: ID!) {
+    person(id: $id) @client {
+      id
+      name
+      birthday
+    }
+  }
+`;

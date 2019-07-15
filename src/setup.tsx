@@ -1,6 +1,7 @@
 import ApolloClient, { InMemoryCache } from "apollo-boost";
-import { GET_PEOPLE, People } from "./constants/people";
+import { GET_PEOPLE, People, Person } from "./constants/people";
 import { persistCache } from "apollo-cache-persist";
+import gql from "graphql-tag";
 // import { GraphQLDateTime } from "graphql-iso-date";
 
 // CSS
@@ -17,6 +18,7 @@ const client = new ApolloClient({
         birthday: GraphQLDate
       }
       type Query {
+        person($id: ID): Person!
         people: [Person]
       }
       type Mutation {
@@ -24,9 +26,22 @@ const client = new ApolloClient({
       }
     `,
     defaults: {
-      people: []
+      people: [
+        {
+          id: "1",
+          name: "mirko",
+          birthday: "1982-11-23",
+          __typename: "Person"
+        }
+      ]
     },
     resolvers: {
+      Query: {
+        person: (_, { id }, { cache }) => {
+          const { people } = cache.readQuery({ query: GET_PEOPLE });
+          return people.find((p: Person) => p.id === id);
+        }
+      },
       Mutation: {
         addPerson: async (_obj, args, { cache }) => {
           const query = GET_PEOPLE;
