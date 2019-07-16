@@ -1,4 +1,4 @@
-export { default as Graph } from "./Graph";
+export { default } from "./Main";
 export { default as Chart } from "./Chart";
 export { default as SVG } from "./SVG";
 export { default as Bar } from "./Bar";

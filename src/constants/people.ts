@@ -29,3 +29,15 @@ export const GET_PERSON = gql`
     }
   }
 `;
+
+export const ADD_PERSON = gql`
+  mutation($id: String, $name: String!, $birthday: GraphQLDateTime) {
+    addPerson(id: $id, name: $name, birthday: $birthday) @client {
+      people {
+        id
+        name
+        birthday
+      }
+    }
+  }
+`;
