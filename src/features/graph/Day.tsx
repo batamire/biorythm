@@ -4,10 +4,10 @@ import moment from "moment";
 interface DayProps {
   date: moment.Moment;
   offset: number;
+  highlight: boolean;
 }
 
-const Day = ({ date, offset }: DayProps) => {
-  const current = moment().diff(date, "hours") === 0;
+const Day = ({ date, offset, highlight }: DayProps) => {
   return (
     <g>
       <rect
@@ -16,7 +16,7 @@ const Day = ({ date, offset }: DayProps) => {
         height="300"
         width="30"
         stroke="#006600"
-        fill={current ? "#00cc00" : "#fff"}
+        fill={highlight ? "#00cc00" : "#fff"}
       />
       <text x={5 + 30 * offset} y="20">
         {moment(date).format("DD")}

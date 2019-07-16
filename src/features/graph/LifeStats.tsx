@@ -2,6 +2,7 @@ import React from "react";
 import moment from "moment";
 import styled from "@emotion/styled";
 import { Person } from "../../constants/people";
+import { FancyDate } from "../../components";
 
 interface LifeStatsProps {
   person: Person;
@@ -20,7 +21,7 @@ const Wrap = styled.div`
 const LifeStats = ({ person: { birthday } }: LifeStatsProps) => (
   <Wrap>
     <p>
-      Day born: <strong>{moment(birthday).format("dddd, YYYY/MM/DD")}</strong>
+      Day born: <FancyDate date={birthday} showDayName />
     </p>
     <p>
       Days alive:{" "}
