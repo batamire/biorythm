@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { useMutation } from "react-apollo-hooks";
 import { ADD_PERSON } from "../../constants/people";
-import { Form as StyledForm, Input, Button } from "../../components/form";
+import {
+  Form as StyledForm,
+  Input,
+  InputIcon,
+  Button
+} from "../../components/form";
+import usericon from "../../assets/user.svg";
+import birthdayicon from "../../assets/birthday.svg";
 
 const nextId = () => Math.round(Math.random() * 10000).toString(10);
 
@@ -31,12 +38,14 @@ const Form = () => {
   };
   return (
     <StyledForm onSubmit={handleSubmit}>
+      <InputIcon src={usericon} />
       <Input
         type="text"
         value={name}
         placeholder="Full Name"
         onChange={event => setName(event.target.value)}
       />
+      <InputIcon src={birthdayicon} alt="" />
       <Input
         type="date"
         value={birthday}
