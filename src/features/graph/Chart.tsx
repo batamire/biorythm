@@ -50,7 +50,7 @@ const Chart = ({ person }: ChartProps) => {
       <SVG person={person} types={types} date={moment(date)} />
       <Legend
         data={types.reduce((obj: LegendData, type) => {
-          obj[type] = bioCalc(moment(person.birthday), moment(), type);
+          obj[type] = bioCalc(moment(person.birthday), moment(date), type);
           return obj;
         }, {})}
       />
