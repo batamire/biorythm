@@ -24,11 +24,11 @@ const client = new ApolloClient({
         birthday: GraphQLDate
       }
       type Query {
-        person($id: ID): Person!
+        person($id: ID): Person
         people: [Person]
       }
       type Mutation {
-        addPerson(id: ID, name: String!, birthday: String): [Person]
+        addPerson(id: ID, name: String!, birthday: String): Person!
       }
     `,
     defaults: {
@@ -50,21 +50,12 @@ const client = new ApolloClient({
       },
       Mutation: {
         addPerson: async (_obj, args, { cache }) => {
-          const query = GET_PEOPLE;
-          const { people }: People = cache.readQuery({ query });
-          await cache.writeQuery({
-            query,
-            data: {
-              people: [
-                ...people,
-                {
-                  ...args,
-                  __typename: "Person"
-                }
-              ]
-            }
+          const { people }: People = cache.readQuery({ query: GET_PEOPLE });
+          const person = { ...args, __typename: "Person" };
+          return cache.writeQuery({
+            query: GET_PEOPLE,
+            data: { people: [person, ...people] }
           });
-          return null;
         }
       }
     }
