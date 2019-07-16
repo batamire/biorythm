@@ -1,3 +1,5 @@
+A Birorythm React App, a proof of concept using TypeScript, Apollo Client for local GraphQL state management, React useState, Apollo useQuery/useMutation, Reach Router and Emotion Styled Components.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
