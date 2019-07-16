@@ -3,7 +3,7 @@ import { GET_PEOPLE, People, Person } from "./constants/people";
 import { persistCache } from "apollo-cache-persist";
 
 // CSS
-import "./app.css";
+import "./App.css";
 
 // localstorage for apollo
 const cache = new InMemoryCache();
