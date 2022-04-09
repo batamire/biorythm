@@ -16,7 +16,7 @@
     "apollo-cache-persist": "^0.1.1",
     "graphql-iso-date": "^3.6.1",
     "graphql-tag": "^2.10.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "moment-range": "^4.0.2",
     "react": "^16.8.6",
     "react-apollo": "^2.5.8",
